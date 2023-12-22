@@ -5,6 +5,7 @@ import { connectDB } from "./config/db.js";
 import { errorHadler } from "./middlewares/errorMiddleware.js";
 import userRouter from "./Routes/UserRouter.js";
 import songsRouter from "./Routes/SongsRouter.js";
+import albumsRouter from "./Routes/AlbumsRouter.js";
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.get("/", (req, res) => {
 // other routes
 app.use("/api/users", userRouter);
 app.use("/api/songs", songsRouter);
+app.use("/api/albums", albumsRouter);
 
 // error handling middleware
 app.use(errorHadler);
