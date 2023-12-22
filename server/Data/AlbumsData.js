@@ -1,0 +1,86 @@
+export const AlbumsData = [
+  {
+    _id: "60d0f9a8c2f0a7a3f1b4f8f3",
+    title: "Begin...",
+    releaseDate: "24 February 2003",
+    genre: "Electronic, Pop",
+  },
+  {
+    _id: "60d0f9a8c2f0a7a3f1b4f8f4",
+    title: "Cyndi Loves You",
+    releaseDate: "26 March 2004",
+    genre: "Electronic, Pop",
+  },
+  {
+    _id: "60d0f9a8c2f0a7a3f1b4f8f5",
+    title: "Honey",
+    releaseDate: "18 February 2005",
+    genre: "Electronic, Pop",
+  },
+  {
+    _id: "60d0f9a8c2f0a7a3f1b4f8f6",
+    title: "Shining 2005",
+    releaseDate: "26 July 2005",
+    genre: "Electronic, Pop",
+  },
+  {
+    _id: "60d0f9a8c2f0a7a3f1b4f8f7",
+    title: "Cyndi With U",
+    releaseDate: "27 December 2005",
+    genre: "Electronic, Pop",
+  },
+  {
+    _id: "60d0f9a8c2f0a7a3f1b4f8f8",
+    title: "Magic Cyndi",
+    releaseDate: "30 April 2007",
+    genre: "Electronic, Pop",
+  },
+  {
+    _id: "60d0f9a8c2f0a7a3f1b4f8f9",
+    title: "Fly Cyndi",
+    releaseDate: "30 November 2007",
+    genre: "Electronic, Pop",
+  },
+  {
+    _id: "60d0f9a8c2f0a7a3f1b4f8fa",
+    title: "Red Cyndi",
+    releaseDate: "29 February 2008",
+    genre: "Electronic, Pop",
+  },
+  {
+    _id: "60d0f9a8c2f0a7a3f1b4f8fb",
+    title: "Beautiful Days",
+    releaseDate: "13 November 2009",
+    genre: "Electronic, Rock, Pop",
+  },
+  {
+    _id: "60d0f9a8c2f0a7a3f1b4f8fc",
+    title: "H2H",
+    releaseDate: "4 December 2009",
+    genre: "Electronic, Rock, Pop",
+  },
+  {
+    _id: "60d0f9a8c2f0a7a3f1b4f8fd",
+    title: "Sticky",
+    releaseDate: "27 May 2011",
+    genre: "Electronic, Pop",
+  },
+  {
+    _id: "60d0f9a8c2f0a7a3f1b4f8fe",
+    title: "Love Or Not",
+    releaseDate: "30 November 2012",
+    genre: "Electronic, Pop",
+  },
+  {
+    _id: "60d0f9a8c2f0a7a3f1b4f8ff",
+    title: "The 10th Cyndi",
+    releaseDate: "25 July 2014",
+    genre: "Electronic, Pop",
+  },
+  {
+    _id: "60d0f9a8c2f0a7a3f1b4f900",
+    title: "Cyndi Wants Or Not",
+    releaseDate: "4 December 2015",
+    genre: "Electronic, Pop",
+  },
+];
