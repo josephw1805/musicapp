@@ -28,12 +28,24 @@ export const Select = ({ label, options, onChange }) => {
   );
 };
 
-export const Input = ({ label, placeholder, type, bg }) => {
+export const Input = ({
+  label,
+  placeholder,
+  type,
+  bg,
+  register,
+  name,
+  value,
+  onChange,
+}) => {
   return (
     <div className="text-sm w-full">
       <label className="text-border font-semibold">{label}</label>
       <input
-        required
+        name={name}
+        value={value}
+        onChange={onChange}
+        {...register}
         type={type}
         placeholder={placeholder}
         className={`w-full text-sm mt-2 p-5 text-white border border-border rounded ${

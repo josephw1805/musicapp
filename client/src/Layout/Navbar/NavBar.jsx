@@ -2,8 +2,10 @@ import { Link, NavLink } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa6";
 import { CgUser } from "react-icons/cg";
+import { useSelector } from "react-redux";
 
 function NavBar() {
+  const { userInfo } = useSelector((state) => state.userLogin);
   const hover = "hover:text-subMain transitions text-white";
   const Hover = ({ isActive }) => (isActive ? "text-subMain" : hover);
 
@@ -48,8 +50,25 @@ function NavBar() {
             <NavLink to="/contact-us" className={Hover}>
               Contact Us
             </NavLink>
-            <NavLink to="/login" className={Hover}>
-              <CgUser className="w-8 h-8" />
+            <NavLink
+              to={
+                userInfo?.isAdmin
+                  ? "/dashboard"
+                  : userInfo
+                  ? "/profile"
+                  : "/login"
+              }
+              className={Hover}
+            >
+              {userInfo ? (
+                <img
+                  src={userInfo?.image ?? "/assets/user.png"}
+                  alt={userInfo?.fullName}
+                  className="w-8 h-8 rounded-full object-cover border-subMain"
+                />
+              ) : (
+                <CgUser className="w-8 h-8" />
+              )}
             </NavLink>
 
             <NavLink to="/favorites" className={Hover}>

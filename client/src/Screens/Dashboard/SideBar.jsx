@@ -1,55 +1,93 @@
 import { BsFillGridFill } from "react-icons/bs";
 import { FaListAlt } from "react-icons/fa";
-import { MdLibraryMusic  } from "react-icons/md";
-import { RiLockPasswordLine, RiMvFill } from "react-icons/ri";
+import { MdLibraryMusic } from "react-icons/md";
+import {
+  RiLockPasswordLine,
+  RiLogoutCircleLine,
+  RiMvFill,
+} from "react-icons/ri";
 import { FaHeart, FaUsers } from "react-icons/fa6";
 import { FiSettings } from "react-icons/fi";
 import Layout from "../../Layout/Layout";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutAction } from "../../Redux/Actions/userActions";
+import toast from "react-hot-toast";
 
 function SideBar({ children }) {
-  const SideLinks = [
-    {
-      name: "Dashboard",
-      link: "/dashboard",
-      icon: BsFillGridFill,
-    },
-    {
-      name: "Songs List",
-      link: "/songslist",
-      icon: FaListAlt,
-    },
-    {
-      name: "Favorites Songs",
-      link: "/favorites",
-      icon: FaHeart,
-    },
-    {
-      name: "Albums",
-      link: "/albums",
-      icon: MdLibraryMusic ,
-    },
-    {
-      name: "Add Song",
-      link: "/addsong",
-      icon: RiMvFill,
-    },
-    {
-      name: "Users",
-      link: "/users",
-      icon: FaUsers,
-    },
-    {
-      name: "Update Profile",
-      link: "/profile",
-      icon: FiSettings,
-    },
-    {
-      name: "Change Password",
-      link: "/password",
-      icon: RiLockPasswordLine,
-    },
-  ];
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { userInfo } = useSelector((state) => state.userLogin);
+
+  // logout function
+  const logoutHandler = () => {
+    dispatch(logoutAction());
+    navigate("/login");
+    toast.success("Logged out successfully");
+  };
+
+  const SideLinks = userInfo?.isAdmin
+    ? [
+        {
+          name: "Dashboard",
+          link: "/dashboard",
+          icon: BsFillGridFill,
+        },
+        {
+          name: "Songs List",
+          link: "/songslist",
+          icon: FaListAlt,
+        },
+        {
+          name: "Favorites Songs",
+          link: "/favorites",
+          icon: FaHeart,
+        },
+        {
+          name: "Albums",
+          link: "/albums",
+          icon: MdLibraryMusic,
+        },
+        {
+          name: "Add Song",
+          link: "/addsong",
+          icon: RiMvFill,
+        },
+        {
+          name: "Users",
+          link: "/users",
+          icon: FaUsers,
+        },
+        {
+          name: "Update Profile",
+          link: "/profile",
+          icon: FiSettings,
+        },
+        {
+          name: "Change Password",
+          link: "/password",
+          icon: RiLockPasswordLine,
+        },
+      ]
+    : userInfo
+    ? [
+        {
+          name: "Update Profile",
+          link: "/profile",
+          icon: FiSettings,
+        },
+        {
+          name: "Favorites Songs",
+          link: "/favorites",
+          icon: FaHeart,
+        },
+        {
+          name: "Change Password",
+          link: "/password",
+          icon: RiLockPasswordLine,
+        },
+      ]
+    : [];
 
   const active = "bg-dryGray text-subMain";
   const hover = "hover:text-white hover:bg-main";
@@ -72,6 +110,12 @@ function SideBar({ children }) {
                 </NavLink>
               ))
             }
+            <button
+              onClick={logoutHandler}
+              className={`${inActive} ${hover} w-full`}
+            >
+              <RiLogoutCircleLine /> Log Out
+            </button>
           </div>
           <div
             data-aos="fade-up"

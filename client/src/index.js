@@ -8,18 +8,16 @@ import "swiper/css/navigation";
 import "aos";
 import "aos/dist/aos.css";
 import { BrowserRouter as Router } from "react-router-dom";
-import ScrollToTop from "./util/ScrollToTop";
-import DrawerContext from "./Context/DrawerContext";
+import { Provider } from "react-redux";
+import { store } from "./Redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Router>
-      <DrawerContext>
-        <ScrollToTop>
-          <App />
-        </ScrollToTop>
-      </DrawerContext>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
   </React.StrictMode>
 );

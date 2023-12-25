@@ -18,28 +18,39 @@ import Albums from "./Screens/Dashboard/Admin/Albums";
 import Users from "./Screens/Dashboard/Admin/Users";
 import AddSong from "./Screens/Dashboard/Admin/AddSong";
 
+import ScrollToTop from "./util/ScrollToTop";
+import DrawerContext from "./Context/DrawerContext";
+import ToastContainer from "./Components/Notifications/ToastContainer";
+
 function App() {
   Aos.init();
   return (
-    <Routes>
-      <Route path="/" element={<HomeScreen />} />
-      <Route path="/about-us" element={<AboutUs />} />
-      <Route path="/contact-us" element={<ContactUs />} />
-      <Route path="/songs" element={<SongsPage />} />
-      <Route path="/song/:id" element={<SingleSong />} />
-      <Route path="/watch/:id" element={<WatchPage />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/profile" element={<Profile />} />
-      <Route path="/password" element={<Password />} />
-      <Route path="/favorites" element={<FavoritesSongs />} />
-      <Route path="/songslist" element={<SongList />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/albums" element={<Albums />} />
-      <Route path="/users" element={<Users />} />
-      <Route path="/addsong" element={<AddSong />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <>
+      <ToastContainer />
+      <DrawerContext>
+        <ScrollToTop>
+          <Routes>
+            <Route path="/" element={<HomeScreen />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/contact-us" element={<ContactUs />} />
+            <Route path="/songs" element={<SongsPage />} />
+            <Route path="/song/:id" element={<SingleSong />} />
+            <Route path="/watch/:id" element={<WatchPage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/password" element={<Password />} />
+            <Route path="/favorites" element={<FavoritesSongs />} />
+            <Route path="/songslist" element={<SongList />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/albums" element={<Albums />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="/addsong" element={<AddSong />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </ScrollToTop>
+      </DrawerContext>
+    </>
   );
 }
 
