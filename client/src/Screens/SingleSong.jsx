@@ -14,10 +14,10 @@ function SingleSong() {
   const [modalOpen, setModalOpen] = useState(false);
 
   const { id } = useParams();
-  const song = Songs.find((song) => song.id === id);
+  const song = Songs.find((song) => song._id === id);
   const RelatedSongs = Songs.filter(
     (relatedSong) => relatedSong.album === song.album
-  ).filter((uniqueSong) => uniqueSong.id !== song.id);
+  );
 
   return (
     <Layout>

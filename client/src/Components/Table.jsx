@@ -38,7 +38,7 @@ const Rows = (song, i, admin) => {
               Download <FaCloudDownloadAlt className="text-green-500" />
             </button>
             <Link
-              to={`/song/${song.id}`}
+              to={`/song/${song._id}`}
               className="bg-subMain text-white rounded flex-colo  w-6 h-6"
             >
               <GoEye />

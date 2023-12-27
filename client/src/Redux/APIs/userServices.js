@@ -64,6 +64,26 @@ const changePasswordService = async (password, token) => {
   return data;
 };
 
+// get all favorite songs
+const getFavoriteSongs = async (token) => {
+  const { data } = await Axios.get("/users/favorites", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return data;
+};
+
+// delete all favorite songs
+const deleteFavoriteSongs = async (token) => {
+  const { data } = await Axios.delete("/users/favorites", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return data;
+};
+
 export {
   registerService,
   logoutService,
@@ -71,4 +91,6 @@ export {
   updateProfileService,
   deleteProfileService,
   changePasswordService,
+  getFavoriteSongs,
+  deleteFavoriteSongs,
 };

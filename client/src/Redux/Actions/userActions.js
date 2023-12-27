@@ -83,6 +83,32 @@ const changePasswordAction = (passwords) => async (dispatch, getState) => {
   }
 };
 
+// get all favorite songs action
+const getFavoriteSongsAction = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: userConstants.GET_FAVORITE_SONGS_REQUEST });
+    const response = await userApi.getFavoriteSongs(tokenProtection(getState));
+    dispatch({
+      type: userConstants.GET_FAVORITE_SONGS_SUCCESS,
+      payload: response,
+    });
+  } catch (error) {
+    ErrorsAction(error, dispatch, userConstants.GET_FAVORITE_SONGS_FAIL);
+  }
+};
+
+// delete all favorite songs action
+const deleteFavoriteSongsAction = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: userConstants.DELETE_FAVORITE_SONGS_REQUEST });
+    await userApi.deleteFavoriteSongs(tokenProtection(getState));
+    dispatch({ type: userConstants.DELETE_FAVORITE_SONGS_SUCCESS });
+    toast.success("All Favorite Songs Deleted");
+  } catch (error) {
+    ErrorsAction(error, dispatch, userConstants.DELETE_FAVORITE_SONGS_FAIL);
+  }
+};
+
 export {
   loginAction,
   registerAction,
@@ -90,4 +116,6 @@ export {
   updateProfileAction,
   deleteProfileAction,
   changePasswordAction,
+  getFavoriteSongsAction,
+  deleteFavoriteSongsAction,
 };

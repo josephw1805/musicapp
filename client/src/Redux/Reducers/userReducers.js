@@ -85,3 +85,40 @@ export const userChangePasswordReducer = (state = {}, action) => {
       return state;
   }
 };
+
+// GET FAVORITE SONGS
+export const userGetFavoriteSongsReducer = (
+  state = {
+    likedSongs: [],
+  },
+  action
+) => {
+  switch (action.type) {
+    case userConstants.GET_FAVORITE_SONGS_REQUEST:
+      return { isLoading: true };
+    case userConstants.GET_FAVORITE_SONGS_SUCCESS:
+      return { isLoading: false, likedSongs: action.payload, isSuccess: true };
+    case userConstants.GET_FAVORITE_SONGS_FAIL:
+      return { isLoading: false, isError: action.payload };
+    case userConstants.GET_FAVORITE_SONGS_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+// DELETE FAVORITE SONGS
+export const userDeleteFavoriteSongsReducer = (state = {}, action) => {
+  switch (action.type) {
+    case userConstants.DELETE_FAVORITE_SONGS_REQUEST:
+      return { isLoading: true };
+    case userConstants.DELETE_FAVORITE_SONGS_SUCCESS:
+      return { isLoading: false, isSuccess: true };
+    case userConstants.DELETE_FAVORITE_SONGS_FAIL:
+      return { isLoading: false, isError: action.payload };
+    case userConstants.DELETE_FAVORITE_SONGS_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
