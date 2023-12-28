@@ -1,12 +1,13 @@
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import moment from "moment";
 
 const Head = "text-xs text-left text-main font-semibold px-6 py-2 uppercase";
 const Text = "text-sm text-left leading-6 whitespace-nowrap px-5 py-3";
 
-const Rows = (data, i, users, OnEditFunction) => {
+const Rows = ({ data, users, OnEditFunction, onDeleteFunction }) => {
   return (
-    <tr key={i}>
+    <tr>
       {users ? (
         <>
           <td className={`${Text}`}>
@@ -19,12 +20,28 @@ const Rows = (data, i, users, OnEditFunction) => {
             </div>
           </td>
           <td className={`${Text} truncate`}>{data?.fullName}</td>
-          <td className={`${Text}`}>{data?.createdAt ?? "12, Dec 2023"}</td>
+          <td className={`${Text}`}>{moment(data?.createdAt).format("LL")}</td>
           <td className={`${Text}`}>{data?.email}</td>
+          <td className={`${Text}`}>
+            {data?.isAdmin ? (
+              <span className="bg-red-100 text-red-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">
+                Admin
+              </span>
+            ) : (
+              <span className="bg-blue-100 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
+                User
+              </span>
+            )}
+          </td>
           <td className={`${Text} float-right flex-rows gap-2`}>
-            <button className="bg-subMain text-white rounded flex-colo  w-6 h-6">
-              <MdDelete />
-            </button>
+            {!data.isAdmin && (
+              <button
+                onClick={() => onDeleteFunction(data?._id)}
+                className="bg-subMain text-white rounded flex-colo  w-6 h-6"
+              >
+                <MdDelete />
+              </button>
+            )}
           </td>
         </>
       ) : (
@@ -39,7 +56,10 @@ const Rows = (data, i, users, OnEditFunction) => {
             >
               Edit <FaEdit className="text-green-500" />
             </button>
-            <button className="bg-subMain text-white rounded flex-colo  w-6 h-6">
+            <button
+              onClick={() => onDeleteFunction(data?._id)}
+              className="bg-subMain text-white rounded flex-colo  w-6 h-6"
+            >
               <MdDelete />
             </button>
           </td>
@@ -49,7 +69,7 @@ const Rows = (data, i, users, OnEditFunction) => {
   );
 };
 
-function Table({ data, users, OnEditFunction }) {
+function Table({ data, users, OnEditFunction, onDeleteFunction }) {
   return (
     <div className="overflow-x-scroll overflow-hidden relative w-full scrollbar-hide">
       <table className="w-full table-auto border border-border divide-y divide-border">
@@ -68,6 +88,9 @@ function Table({ data, users, OnEditFunction }) {
                 </th>
                 <th scope="col" className={`${Head}`}>
                   Email
+                </th>
+                <th scope="col" className={`${Head}`}>
+                  Role
                 </th>
               </>
             ) : (
@@ -88,7 +111,15 @@ function Table({ data, users, OnEditFunction }) {
           </tr>
         </thead>
         <tbody className="bg-main divide-y divide-gray-800">
-          {data.map((data, i) => Rows(data, i, users, OnEditFunction))}
+          {data.map((data, i) => (
+            <Rows
+              key={i}
+              data={data}
+              users={users}
+              OnEditFunction={OnEditFunction}
+              onDeleteFunction={onDeleteFunction}
+            />
+          ))}
         </tbody>
       </table>
     </div>

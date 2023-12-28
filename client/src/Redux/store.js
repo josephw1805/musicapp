@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import * as User from "./Reducers/userReducers";
+import * as Album from "./Reducers/AlbumsReducer";
 
 const rootReducer = combineReducers({
   // user reducers
@@ -10,6 +11,14 @@ const rootReducer = combineReducers({
   userChangePassword: User.userChangePasswordReducer,
   userGetFavoriteSongs: User.userGetFavoriteSongsReducer,
   userDeleteFavoriteSongs: User.userDeleteFavoriteSongsReducer,
+  adminGetAllUsers: User.adminGetAllUsersReducer,
+  adminDeleteUser: User.adminDeleteUserReducer,
+
+  // album reducers
+  albumGetAll: Album.getAllAlbumsReducer,
+  albumCreate: Album.createAlbumReducer,
+  albumUpdate: Album.updateAlbumReducer,
+  albumDelete: Album.deleteAlbumReducer,
 });
 
 // get userInfo from localStorage

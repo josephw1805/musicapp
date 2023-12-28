@@ -1,13 +1,31 @@
 import { useEffect, useState } from "react";
 import AlbumModal from "../../../Components/Modals/AlbumModal";
 import Table from "../../../Components/Table2";
-import { AlbumsData } from "../../../Data/AlbumsData";
 import SideBar from "../SideBar";
 import { HiPlusCircle } from "react-icons/hi";
+import { useDispatch, useSelector } from "react-redux";
+import Loader from "../../../Components/Notifications/Loader";
+import { Empty } from "../../../Components/Notifications/Empty";
+import {
+  deleteAlbumAction,
+  getAlbumsAction,
+} from "../../../Redux/Actions/AlbumsActions";
+import toast from "react-hot-toast";
 
 function Albums() {
   const [modalOpen, setModalOpen] = useState(false);
   const [album, setAlbum] = useState();
+  const dispatch = useDispatch();
+
+  // all albums
+  const { albums, isLoading } = useSelector((state) => state.albumGetAll);
+  // delete album
+  const { isSuccess, isError } = useSelector((state) => state.albumDelete);
+  const adminDeleteAlbum = (id) => {
+    if (window.confirm("Are you sure you want to delete this album?")) {
+      dispatch(deleteAlbumAction(id));
+    }
+  };
 
   const OnEditFunction = (id) => {
     setAlbum(id);
@@ -15,10 +33,21 @@ function Albums() {
   };
 
   useEffect(() => {
-    if (!modalOpen) {
-      setAlbum(null);
+    // get all albums
+    dispatch(getAlbumsAction());
+
+    if (isError) {
+      toast.error(isError);
+      dispatch({ type: "DELETE_ALBUM_RESET" });
     }
-  }, [modalOpen]);
+    if (isSuccess) {
+      dispatch({ type: "DELETE_ALBUM_RESET" });
+    }
+
+    if (!modalOpen) {
+      setAlbum();
+    }
+  }, [modalOpen, dispatch, isSuccess, isError]);
 
   return (
     <SideBar>
@@ -38,11 +67,18 @@ function Albums() {
           </button>
         </div>
 
-        <Table
-          data={AlbumsData}
-          users={false}
-          OnEditFunction={OnEditFunction}
-        />
+        {isLoading ? (
+          <Loader />
+        ) : albums?.length > 0 ? (
+          <Table
+            data={albums}
+            users={false}
+            OnEditFunction={OnEditFunction}
+            onDeleteFunction={adminDeleteAlbum}
+          />
+        ) : (
+          <Empty message="You have no albums" />
+        )}
       </div>
     </SideBar>
   );

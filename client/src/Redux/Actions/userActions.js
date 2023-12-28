@@ -109,6 +109,36 @@ const deleteFavoriteSongsAction = () => async (dispatch, getState) => {
   }
 };
 
+// admin get all users action
+const getAllUsersAction = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: userConstants.GET_ALL_USERS_REQUEST });
+    const response = await userApi.getAllUsersService(
+      tokenProtection(getState)
+    );
+    dispatch({
+      type: userConstants.GET_ALL_USERS_SUCCESS,
+      payload: response,
+    });
+  } catch (error) {
+    ErrorsAction(error, dispatch, userConstants.GET_ALL_USERS_FAIL);
+  }
+};
+
+// admin delete user action
+const deleteUserAction = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: userConstants.DELETE_USER_REQUEST });
+    await userApi.deleteUserService(id, tokenProtection(getState));
+    dispatch({
+      type: userConstants.DELETE_USER_SUCCESS,
+    });
+    toast.success("User Deleted");
+  } catch (error) {
+    ErrorsAction(error, dispatch, userConstants.DELETE_USER_FAIL);
+  }
+};
+
 export {
   loginAction,
   registerAction,
@@ -118,4 +148,6 @@ export {
   changePasswordAction,
   getFavoriteSongsAction,
   deleteFavoriteSongsAction,
+  getAllUsersAction,
+  deleteUserAction,
 };
