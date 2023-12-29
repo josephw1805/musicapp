@@ -1,43 +1,29 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
-import { AlbumsData } from "../Data/AlbumsData";
 import { FaAngleDown, FaCheck } from "react-icons/fa";
+import { GenreData, RatesData, YearData } from "../Data/Filter";
 
-const YearData = [
-  { title: "Sort By Year" },
-  { title: "2003 - 2007" },
-  { title: "2008 - 2012" },
-  { title: "2013 - 2017" },
-  { title: "2018 - 2023" },
-];
-
-const GenreData = [
-  { title: "Sort By Genre" },
-  { title: "Electronic, Pop" },
-  { title: "Pop" },
-  { title: "Electronic, Rock, Pop" },
-];
-
-const RatesData = [
-  { title: "Sort By Rating" },
-  { title: "1 Star" },
-  { title: "2 Star" },
-  { title: "3 Star" },
-  { title: "4 Star" },
-  { title: "5 Star" },
-];
-
-function Filters() {
-  const [album, setAlbum] = useState({ title: "All" });
-  const [year, setYear] = useState(YearData[0]);
-  const [genre, setGenre] = useState(GenreData[0]);
-  const [rate, setRate] = useState(RatesData[0]);
+function Filters(props) {
+  const {
+    albums,
+    album,
+    setAlbum,
+    genre,
+    setGenre,
+    year,
+    setYear,
+    rate,
+    setRate,
+  } = props?.data;
 
   const Filter = [
     {
       value: album,
       onChange: setAlbum,
-      items: AlbumsData,
+      items:
+        albums?.length > 0
+          ? [{ title: "All Albums" }, ...albums]
+          : [{ title: "No Albums found" }],
     },
     {
       value: year,
@@ -57,7 +43,7 @@ function Filters() {
   ];
 
   return (
-    <div className="my-6 bg-dry border text-dryGray border-gray-800 grid md:grid-cols-4 grid-cols-2 lg:gap-12 gap-2 rounded p-6">
+    <div className="my-6 bg-dry border text-dryGray border-gray-800 grid md:grid-cols-5 grid-cols-2 lg:gap-12 gap-2 rounded p-6">
       {Filter.map((item, index) => (
         <Listbox key={index} value={item.value} onChange={item.onChange}>
           <div className="relative">

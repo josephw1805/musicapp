@@ -68,7 +68,7 @@ function AlbumModal({ modalOpen, setModalOpen, album }) {
       setGenre("");
       setReleaseDate("");
     }
-  }, [isError, isSuccess, upSuccess, upError, album, modalOpen]);
+  }, [dispatch, isError, isSuccess, upSuccess, upError, album, modalOpen]);
 
   return (
     <MainModal modalOpen={modalOpen} setModalOpen={setModalOpen}>

@@ -1,19 +1,5 @@
 import asyncHandler from "express-async-handler";
 import Song from "../Models/SongsModel.js";
-import { Songs } from "../Data/SongData.js";
-
-// ***************  PUBLIC CONTROLLERS  ***************
-// @desc      import songs
-// @route     POST /api/songs/import
-// @access    Public
-
-const importSongs = asyncHandler(async (req, res) => {
-  // make sure Songs table is empty by deleting all documents
-  await Song.deleteMany({});
-  // then insert all songs from SongsData
-  const songs = await Song.insertMany(Songs);
-  res.status(201).json(songs);
-});
 
 // @desc      get all songs
 // @route     GET /api/songs
@@ -36,12 +22,12 @@ const getSongs = asyncHandler(async (req, res) => {
 
     // load more songs functionality
     const page = Number(req.query.pageNumber) || 1; // if pageNumber is not provided in query, set it to 1
-    const limit = 2; // 2 songs per page
-    const skip = (page - 1) * limit; // skip 2 songs per page
+    const limit = 5; // 5 songs per page
+    const skip = (page - 1) * limit; // skip 5 songs per page
 
     // find songs by query, skip and limit
     const songs = await Song.find(query)
-      .sort({ createdAt: -1 })
+      .sort({ createdAt: 1 })
       .skip(skip)
       .limit(limit);
 
@@ -309,7 +295,6 @@ const createSong = asyncHandler(async (req, res) => {
 });
 
 export {
-  importSongs,
   getSongs,
   getSongById,
   getTopRatedSongs,

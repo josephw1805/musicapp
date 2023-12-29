@@ -15,9 +15,9 @@ function SingleSong() {
 
   const { id } = useParams();
   const song = Songs.find((song) => song._id === id);
-  const RelatedSongs = Songs.filter(
-    (relatedSong) => relatedSong.album === song.album
-  );
+  // const RelatedSongs = Songs.filter(
+  //   (relatedSong) => relatedSong.album === song.album
+  // ).filter((relatedSong) => relatedSong._id !== song._id);
 
   return (
     <Layout>
@@ -35,9 +35,9 @@ function SingleSong() {
         <div className="my-16">
           <Titles title="Related Songs" Icon={BsCollectionFill} />
           <div className="grid sm:mt-10 mt-6 xl:grid-cols-4 2xl:grid-cols-5 lg:grid-cols-3 sm:grid-cols-2 gap-6">
-            {RelatedSongs.map((song, index) => (
+            {/* {RelatedSongs.map((song, index) => (
               <Song key={index} song={song} />
-            ))}
+            ))} */}
           </div>
         </div>
       </div>

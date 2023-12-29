@@ -1,14 +1,27 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa6";
 import { CgUser } from "react-icons/cg";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
 function NavBar() {
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.userLogin);
   const { likedSongs } = useSelector((state) => state.userGetFavoriteSongs);
   const hover = "hover:text-subMain transitions text-white";
   const Hover = ({ isActive }) => (isActive ? "text-subMain" : hover);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (search.trim()) {
+      navigate(`/songs/${search}`);
+      setSearch(search);
+    } else {
+      navigate("/songs");
+    }
+  };
 
   return (
     <>
@@ -26,7 +39,10 @@ function NavBar() {
           </div>
           {/* search Form */}
           <div className="col-span-3">
-            <form className="w-full text-sm bg-dryGray rounded flex-btn gap-4">
+            <form
+              onSubmit={handleSearch}
+              className="w-full text-sm bg-dryGray rounded flex-btn gap-4"
+            >
               <button
                 type="submit"
                 className="bg-subMain w-12 flex-colo h-12 rounded text-white"
@@ -34,7 +50,9 @@ function NavBar() {
                 <FaSearch />
               </button>
               <input
-                type="text"
+                type="search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search Music Name from here"
                 className="font-medium placeholder:text-border text-sm w-11/12 h-12 bg-transparent border-none px-2 text-black"
               />

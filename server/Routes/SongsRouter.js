@@ -5,7 +5,6 @@ import * as songsController from "../Controllers/songsController.js";
 const router = express.Router();
 
 // ******** PUBLIC ROUTES ********
-router.post("/import", songsController.importSongs);
 router.get("/", songsController.getSongs);
 router.get("/:id", songsController.getSongById);
 router.get("/rated/top", songsController.getTopRatedSongs);

@@ -8,7 +8,7 @@ import { FaHeart } from "react-icons/fa6";
 
 function WatchPage() {
   let { id } = useParams();
-  const song = Songs.find((song) => song.id === id);
+  const song = Songs.find((song) => song._id === id);
   const [play, setPlay] = useState(false);
 
   return (
@@ -16,7 +16,7 @@ function WatchPage() {
       <div className="container mx-auto bg-dry p-6 mb-12">
         <div className="flex-btn flex-wrap mb-6 gap-2 bg-main rounded border border-gray-800 p-6">
           <Link
-            to={`/song/${song?.id}`}
+            to={`/song/${song?._id}`}
             className="md:text-xl text-sm flex gap-3 items-center font-bold text-dryGray"
           >
             <BiArrowBack /> {song?.name}

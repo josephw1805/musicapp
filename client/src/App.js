@@ -21,10 +21,18 @@ import AddSong from "./Screens/Dashboard/Admin/AddSong";
 import ScrollToTop from "./util/ScrollToTop";
 import DrawerContext from "./Context/DrawerContext";
 import ToastContainer from "./Components/Notifications/ToastContainer";
-import {ProtectedRouter, AdminProtectedRouter} from "./ProtectedRouter";
+import { ProtectedRouter, AdminProtectedRouter } from "./ProtectedRouter";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getAlbumsAction } from "./Redux/Actions/AlbumsActions";
 
 function App() {
   Aos.init();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAlbumsAction());
+  }, [dispatch]);
+
   return (
     <>
       <ToastContainer />
@@ -36,6 +44,7 @@ function App() {
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/songs" element={<SongsPage />} />
+            <Route path="/songs/:search" element={<SongsPage />} />
             <Route path="/song/:id" element={<SingleSong />} />
             <Route path="/watch/:id" element={<WatchPage />} />
             <Route path="/login" element={<Login />} />
