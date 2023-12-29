@@ -2,7 +2,7 @@ import Axios from "./Axios";
 
 // **** PUBLIC APIs ****
 
-// get all songs API function
+// get all songs API
 const getAllSongsService = async ({
   album,
   genre,
@@ -18,21 +18,31 @@ const getAllSongsService = async ({
   return data;
 };
 
-// get random song API function
+// get random song API
 const getRandomSongService = async () => {
   const { data } = await Axios.get("/songs/random/all");
   return data;
 };
 
-// get song by id API function
+// get song by id API
 const getSongByIdService = async (id) => {
   const { data } = await Axios.get(`/songs/${id}`);
   return data;
 };
 
-// get top rated songs API function
+// get top rated songs API
 const getTopRatedSongsService = async () => {
   const { data } = await Axios.get("/songs/rated/top");
+  return data;
+};
+
+// review song API
+const reviewSongService = async (token, id, review) => {
+  const { data } = await Axios.post(`/songs/${id}/reviews`, review, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return data;
 };
 
@@ -41,4 +51,5 @@ export {
   getRandomSongService,
   getSongByIdService,
   getTopRatedSongsService,
+  reviewSongService,
 };

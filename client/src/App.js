@@ -22,16 +22,34 @@ import ScrollToTop from "./util/ScrollToTop";
 import DrawerContext from "./Context/DrawerContext";
 import ToastContainer from "./Components/Notifications/ToastContainer";
 import { ProtectedRouter, AdminProtectedRouter } from "./ProtectedRouter";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAlbumsAction } from "./Redux/Actions/AlbumsActions";
+import { getAllSongsAction } from "./Redux/Actions/SongsActions";
+import { getFavoriteSongsAction } from "./Redux/Actions/userActions";
+import toast from "react-hot-toast";
 
 function App() {
   Aos.init();
   const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.userLogin);
+  const { isError, isSuccess } = useSelector((state) => state.userLikeSong);
+  const { isError: albumError } = useSelector((state) => state.albumGetAll);
+
   useEffect(() => {
     dispatch(getAlbumsAction());
-  }, [dispatch]);
+    dispatch(getAllSongsAction({}));
+    if (userInfo) {
+      dispatch(getFavoriteSongsAction());
+    }
+    if (isError || albumError) {
+      toast.error("Something went wrong. Please try again later");
+      dispatch({ type: "LIKE_SONG_RESET" });
+    }
+    if (isSuccess) {
+      dispatch({ type: "LIKE_SONG_RESET" });
+    }
+  }, [dispatch, userInfo, isError, albumError, isSuccess]);
 
   return (
     <>

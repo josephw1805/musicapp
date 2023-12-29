@@ -12,6 +12,7 @@ const rootReducer = combineReducers({
   userChangePassword: User.userChangePasswordReducer,
   userGetFavoriteSongs: User.userGetFavoriteSongsReducer,
   userDeleteFavoriteSongs: User.userDeleteFavoriteSongsReducer,
+  userLikeSong: User.userLikeSongReducer,
   adminGetAllUsers: User.adminGetAllUsersReducer,
   adminDeleteUser: User.adminDeleteUserReducer,
 
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   getRandomSongs: Song.songsRandomReducer,
   getSongById: Song.songDetailsReducer,
   getTopRatedSongs: Song.songTopRatedReducer,
+  createReview: Song.createReviewReducer,
 });
 
 // get userInfo from localStorage

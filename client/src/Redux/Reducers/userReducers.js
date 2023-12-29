@@ -123,6 +123,22 @@ export const userDeleteFavoriteSongsReducer = (state = {}, action) => {
   }
 };
 
+// USER LIKE SONG
+export const userLikeSongReducer = (state = {}, action) => {
+  switch (action.type) {
+    case userConstants.LIKE_SONG_REQUEST:
+      return { isLoading: true };
+    case userConstants.LIKE_SONG_SUCCESS:
+      return { isLoading: false, isSuccess: true };
+    case userConstants.LIKE_SONG_FAIL:
+      return { isLoading: false, isError: action.payload };
+    case userConstants.LIKE_SONG_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
 // ADMIN GET ALL USERS
 export const adminGetAllUsersReducer = (state = { users: [] }, action) => {
   switch (action.type) {

@@ -5,6 +5,7 @@ import {
   TelegramShareButton,
   TwitterShareButton,
   WhatsappShareButton,
+  WeiboShareButton,
 } from "react-share";
 import { FaTelegram } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
@@ -13,6 +14,7 @@ import {
   FaSquareFacebook,
   FaWhatsapp,
   FaXTwitter,
+  FaWeibo,
 } from "react-icons/fa6";
 import MainModal from "./MainModal";
 
@@ -21,6 +23,10 @@ function ShareSongModal({ modalOpen, setModalOpen, song }) {
     {
       icon: FaSquareFacebook,
       shareButton: FacebookShareButton,
+    },
+    {
+      icon: FaWeibo,
+      shareButton: WeiboShareButton,
     },
     {
       icon: FaXTwitter,
@@ -44,7 +50,7 @@ function ShareSongModal({ modalOpen, setModalOpen, song }) {
     },
   ];
 
-  const url = `${window.location.protocol}//${window.location.host}/song/${song.id}`;
+  const url = `${window.location.protocol}//${window.location.host}/song/${song?._id}`;
 
   return (
     <MainModal modalOpen={modalOpen} setModalOpen={setModalOpen}>

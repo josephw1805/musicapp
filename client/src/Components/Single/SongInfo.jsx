@@ -1,6 +1,7 @@
 import { FaCloudDownloadAlt, FaPlay, FaShareAlt } from "react-icons/fa";
 import FlexSongItems from "../FlexSongItems";
 import { Link } from "react-router-dom";
+import Rating from "../Stars";
 
 function SongInfo({ song, setModalOpen }) {
   return (
@@ -28,7 +29,7 @@ function SongInfo({ song, setModalOpen }) {
               {/* flex items */}
               <div className="flex items-center gap-4 font-medium text-dryGray">
                 <div className="flex-colo bg-subMain text-xs px-2 py-1">
-                  {song?.bitrate ?? 320} Kbps
+                  320 Kbps
                 </div>
                 <FlexSongItems song={song} />
               </div>
@@ -54,12 +55,16 @@ function SongInfo({ song, setModalOpen }) {
                 {/* watch button */}
                 <div className="sm:col-span-2 col-span-3 flex justify-end font-medium text-sm">
                   <Link
-                    to={`/watch/${song?.id}`}
+                    to={`/watch/${song?._id}`}
                     className="bg-dry py-4 hover:bg-subMain transitions border-2 border-subMain rounded-full flex-rows gap-4 w-full sm:py-3"
                   >
                     <FaPlay className="w-3 h-3" /> Watch
                   </Link>
                 </div>
+              </div>
+              {/* ratings */}
+              <div className="flex mb-6 text-lg gap-2 text-star">
+                <Rating value={song?.rate} />
               </div>
             </div>
             <div className="col-span-2 md:mt-0 mt-2 flex justify-end">

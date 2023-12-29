@@ -88,6 +88,16 @@ const deleteFavoriteSongs = async (token) => {
   return data;
 };
 
+// like song API call
+const likeSongService = async (songId, token) => {
+  const { data } = await Axios.post("/users/favorites/", songId, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return data;
+};
+
 // **** ADMIN APIs ****
 
 // get all users
@@ -119,6 +129,7 @@ export {
   changePasswordService,
   getFavoriteSongs,
   deleteFavoriteSongs,
+  likeSongService,
   getAllUsersService,
   deleteUserService,
 };

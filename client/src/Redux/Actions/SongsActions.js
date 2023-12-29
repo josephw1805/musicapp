@@ -67,3 +67,26 @@ export const getTopRatedSongAction = () => async (dispatch) => {
     ErrorsAction(error, dispatch, SongsConstants.SONGS_TOP_RATED_FAIL);
   }
 };
+
+// review song action
+export const reviewSongAction =
+  ({ id, review }) =>
+  async (dispatch, getState) => {
+    try {
+      dispatch({ type: SongsConstants.CREATE_REVIEW_REQUEST });
+      const response = await SongsAPIs.reviewSongService(
+        tokenProtection(getState),
+        id,
+        review
+      );
+      dispatch({
+        type: SongsConstants.CREATE_REVIEW_SUCCESS,
+        payload: response,
+      });
+      toast.success("Review added successfully");
+      dispatch({ type: SongsConstants.CREATE_REVIEW_RESET });
+      dispatch(getSongByIdAction(id));
+    } catch (error) {
+      ErrorsAction(error, dispatch, SongsConstants.CREATE_REVIEW_FAIL);
+    }
+  };

@@ -12,8 +12,19 @@ import { Link } from "react-router-dom";
 import Loader from "../../Components/Notifications/Loader";
 import Rating from "../Stars";
 import { Empty } from "../Notifications/Empty";
+import { useDispatch, useSelector } from "react-redux";
+import { LikeSong, SongLiked } from "../../Context/Functionalities";
 
 const SwiperTop = ({ nextEl, prevEl, songs }) => {
+  const { isLoading } = useSelector((state) => state.userLikeSong);
+  const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.userLogin);
+
+  // check if song is added to favorites
+  const isLiked = (song) => {
+    return SongLiked(song);
+  };
+
   return (
     <Swiper
       navigation={{ nextEl, prevEl }}
@@ -49,7 +60,14 @@ const SwiperTop = ({ nextEl, prevEl, songs }) => {
               className="w-full h-full object-cover rounded-lg"
             />
             <div className="px-4 hoveres gap-6 text-center absolute bg-black bg-opacity-70 top-0 left-0 right-0 bottom-0">
-              <button className="w-12 h-12 flex-colo transitions hover:bg-subMain rounded-full bg-white bg-opacity-30 text-white">
+              <button
+                onClick={() => LikeSong(song, dispatch, userInfo)}
+                disabled={isLiked(song) || isLoading}
+                className={`w-12 h-12 flex-colo transitions hover:bg-subMain rounded-full
+                ${
+                  isLiked(song) ? "bg-subMain" : "bg-white bg-opacity-30"
+                } text-white`}
+              >
                 <FaHeart />
               </button>
               <Link

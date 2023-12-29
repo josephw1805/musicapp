@@ -109,6 +109,25 @@ const deleteFavoriteSongsAction = () => async (dispatch, getState) => {
   }
 };
 
+// user like song action
+const likeSongAction = (songId) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: userConstants.LIKE_SONG_REQUEST });
+    const response = await userApi.likeSongService(
+      songId,
+      tokenProtection(getState)
+    );
+    dispatch({
+      type: userConstants.LIKE_SONG_SUCCESS,
+      payload: response,
+    });
+    toast.success("Added to your favorites");
+    dispatch(getFavoriteSongsAction());
+  } catch (error) {
+    ErrorsAction(error, dispatch, userConstants.LIKE_SONG_FAIL);
+  }
+};
+
 // admin get all users action
 const getAllUsersAction = () => async (dispatch, getState) => {
   try {
@@ -148,6 +167,7 @@ export {
   changePasswordAction,
   getFavoriteSongsAction,
   deleteFavoriteSongsAction,
+  likeSongAction,
   getAllUsersAction,
   deleteUserAction,
 };

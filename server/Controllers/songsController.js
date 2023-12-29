@@ -173,6 +173,9 @@ const updateSong = asyncHandler(async (req, res) => {
       image,
       titleImage,
       video,
+      artists,
+      numberOfReviews,
+      reviews,
     } = req.body;
 
     // find song by id in database
@@ -190,6 +193,9 @@ const updateSong = asyncHandler(async (req, res) => {
       song.image = image || song.image;
       song.titleImage = titleImage || song.titleImage;
       song.video = video || song.video;
+      song.artists = artists || song.artists;
+      song.numberOfReviews = numberOfReviews || song.numberOfReviews;
+      song.reviews = reviews || song.reviews;
 
       // save the song in database
 

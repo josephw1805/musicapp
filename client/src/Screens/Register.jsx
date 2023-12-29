@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FiLogIn } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { LoginValidation } from "../Components/Validation/UserValidation";
+import { RegisterValidation } from "../Components/Validation/UserValidation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { InlineError } from "../Components/Notifications/Error";
 import { registerAction } from "../Redux/Actions/userActions";
@@ -25,7 +25,7 @@ function Register() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(LoginValidation),
+    resolver: yupResolver(RegisterValidation),
   });
 
   // on submit

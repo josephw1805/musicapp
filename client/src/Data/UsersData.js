@@ -1,29 +1,5 @@
 export const UsersData = [
   {
-    _id: "60d0f9a7c2f0a7a3f1b4f8e6",
-    fullName: "Mr. He",
-    email: "he657@wdia.com",
-    image: "/assets/users/Mr. He.png",
-    message: "This song is very good.",
-    rate: 5,
-  },
-  {
-    _id: "60d0f9a7c2f0a7a3f1b4f8e7",
-    fullName: "Cyndi Wang",
-    email: "cyndi657@wdia.com",
-    message:
-      "I am very proud of this performance, hope to gain more achievemnent in the future.",
-    rate: 4.5,
-  },
-  {
-    _id: "60d0f9a7c2f0a7a3f1b4f8e8",
-    fullName: "Han Hong",
-    email: "han657@wdia.com",
-    image: "/assets/users/Han Hong.png",
-    message: "Your singing skills is outstanding :)",
-    rate: 5,
-  },
-  {
     _id: "60d0f9a7c2f0a7a3f1b4f8e9",
     fullName: "Gu Ju Ji",
     email: "ji657@wdia.com",

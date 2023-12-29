@@ -63,3 +63,19 @@ export const songTopRatedReducer = (state = { songs: [] }, action) => {
       return state;
   }
 };
+
+// CREATE REVIEW
+export const createReviewReducer = (state = {}, action) => {
+  switch (action.type) {
+    case SongsConstants.CREATE_REVIEW_REQUEST:
+      return { isLoading: true };
+    case SongsConstants.CREATE_REVIEW_SUCCESS:
+      return { isLoading: false, isSuccess: true };
+    case SongsConstants.CREATE_REVIEW_FAIL:
+      return { isLoading: false, isError: action.payload };
+    case SongsConstants.CREATE_REVIEW_RESET:
+      return {};
+    default:
+      return state;
+  }
+};

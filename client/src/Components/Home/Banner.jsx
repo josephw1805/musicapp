@@ -1,12 +1,23 @@
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { FaHeart } from "react-icons/fa6";
 import { RiMusic2Line } from "react-icons/ri";
 import FlexSongItems from "../FlexSongItems";
 import Loader from "../../Components/Notifications/Loader";
+import { LikeSong, SongLiked } from "../../Context/Functionalities";
 
 const SwiperComponent = ({ songs }) => {
+  const { isLoading } = useSelector((state) => state.userLikeSong);
+  const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.userLogin);
+
+  // check if song is added to favorites
+  const isLiked = (song) => {
+    return SongLiked(song);
+  };
+
   return (
     <Swiper
       direction="vertical"
@@ -38,7 +49,13 @@ const SwiperComponent = ({ songs }) => {
               >
                 Play
               </Link>
-              <button className="bg-white hover:text-subMain transitions text-white px-4 py-3 rounded text-sm bg-opacity-30">
+              <button
+                onClick={() => LikeSong(song, dispatch, userInfo)}
+                disabled={isLiked(song) || isLoading}
+                className={`bg-white ${
+                  isLiked(song) ? "text-subMain" : "text-white"
+                } hover:text-subMain transitions px-4 py-3 rounded text-sm bg-opacity-30`}
+              >
                 <FaHeart />
               </button>
             </div>
