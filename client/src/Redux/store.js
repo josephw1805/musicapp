@@ -23,6 +23,9 @@ const rootReducer = combineReducers({
 
   // song reducers
   getAllSongs: Song.songsListReducer,
+  getRandomSongs: Song.songsRandomReducer,
+  getSongById: Song.songDetailsReducer,
+  getTopRatedSongs: Song.songTopRatedReducer,
 });
 
 // get userInfo from localStorage

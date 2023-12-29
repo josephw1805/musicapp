@@ -31,3 +31,39 @@ export const getAllSongsAction =
       ErrorsAction(error, dispatch, SongsConstants.SONGS_LIST_FAIL);
     }
   };
+
+// get random song action
+export const getRandomSongsAction = () => async (dispatch) => {
+  try {
+    dispatch({ type: SongsConstants.SONGS_RANDOM_REQUEST });
+    const response = await SongsAPIs.getRandomSongService();
+    dispatch({ type: SongsConstants.SONGS_RANDOM_SUCCESS, payload: response });
+  } catch (error) {
+    ErrorsAction(error, dispatch, SongsConstants.SONGS_RANDOM_FAIL);
+  }
+};
+
+// get song by id action
+export const getSongByIdAction = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: SongsConstants.SONGS_DETAILS_REQUEST });
+    const response = await SongsAPIs.getSongByIdService(id);
+    dispatch({ type: SongsConstants.SONGS_DETAILS_SUCCESS, payload: response });
+  } catch (error) {
+    ErrorsAction(error, dispatch, SongsConstants.SONGS_DETAILS_FAIL);
+  }
+};
+
+// get top rated song action
+export const getTopRatedSongAction = () => async (dispatch) => {
+  try {
+    dispatch({ type: SongsConstants.SONGS_TOP_RATED_REQUEST });
+    const response = await SongsAPIs.getTopRatedSongsService();
+    dispatch({
+      type: SongsConstants.SONGS_TOP_RATED_SUCCESS,
+      payload: response,
+    });
+  } catch (error) {
+    ErrorsAction(error, dispatch, SongsConstants.SONGS_TOP_RATED_FAIL);
+  }
+};

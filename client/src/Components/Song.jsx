@@ -5,7 +5,7 @@ function Song({ song }) {
   return (
     <>
       <div className="border border-border p-1 hover:scale-95 transitions relative rounded overflow-hidden">
-        <Link to={`/song/${song?.id}`} className="w-full">
+        <Link to={`/song/${song?._id}`} className="w-full">
           <img
             src={song?.titleImage}
             alt={song?.name}

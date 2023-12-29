@@ -18,4 +18,27 @@ const getAllSongsService = async ({
   return data;
 };
 
-export { getAllSongsService };
+// get random song API function
+const getRandomSongService = async () => {
+  const { data } = await Axios.get("/songs/random/all");
+  return data;
+};
+
+// get song by id API function
+const getSongByIdService = async (id) => {
+  const { data } = await Axios.get(`/songs/${id}`);
+  return data;
+};
+
+// get top rated songs API function
+const getTopRatedSongsService = async () => {
+  const { data } = await Axios.get("/songs/rated/top");
+  return data;
+};
+
+export {
+  getAllSongsService,
+  getRandomSongService,
+  getSongByIdService,
+  getTopRatedSongsService,
+};
