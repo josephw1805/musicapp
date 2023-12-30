@@ -43,7 +43,7 @@ function App() {
       dispatch(getFavoriteSongsAction());
     }
     if (isError || albumError) {
-      toast.error("Something went wrong. Please try again later");
+      toast.error(isError || albumError);
       dispatch({ type: "LIKE_SONG_RESET" });
     }
     if (isSuccess) {
@@ -79,7 +79,7 @@ function App() {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/albums" element={<Albums />} />
                 <Route path="/users" element={<Users />} />
-                <Route path="/addsong" element={<AddSong />} />
+                {/* <Route path="/addsong" element={<AddSong />} /> */}
               </Route>
             </Route>
           </Routes>

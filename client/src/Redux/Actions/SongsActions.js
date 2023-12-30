@@ -90,3 +90,40 @@ export const reviewSongAction =
       ErrorsAction(error, dispatch, SongsConstants.CREATE_REVIEW_FAIL);
     }
   };
+
+// delete song action
+export const deleteSongAction = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: SongsConstants.DELETE_SONG_REQUEST });
+    const response = await SongsAPIs.deleteSongService(
+      tokenProtection(getState),
+      id
+    );
+    dispatch({
+      type: SongsConstants.DELETE_SONG_SUCCESS,
+      payload: response,
+    });
+    toast.success("Song deleted successfully");
+    dispatch(getAllSongsAction({}));
+  } catch (error) {
+    ErrorsAction(error, dispatch, SongsConstants.DELETE_SONG_FAIL);
+  }
+};
+
+// delete all songs action
+export const deleteAllSongsAction = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: SongsConstants.DELETE_ALL_SONGS_REQUEST });
+    const response = await SongsAPIs.deleteAllSongsService(
+      tokenProtection(getState)
+    );
+    dispatch({
+      type: SongsConstants.DELETE_ALL_SONGS_SUCCESS,
+      payload: response,
+    });
+    toast.success("All songs deleted successfully");
+    dispatch(getAllSongsAction({}));
+  } catch (error) {
+    ErrorsAction(error, dispatch, SongsConstants.DELETE_ALL_SONGS_FAIL);
+  }
+};

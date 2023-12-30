@@ -28,6 +28,8 @@ const rootReducer = combineReducers({
   getSongById: Song.songDetailsReducer,
   getTopRatedSongs: Song.songTopRatedReducer,
   createReview: Song.createReviewReducer,
+  deleteSong: Song.deleteSongReducer,
+  deleteAllSongs: Song.deleteAllSongsReducer,
 });
 
 // get userInfo from localStorage

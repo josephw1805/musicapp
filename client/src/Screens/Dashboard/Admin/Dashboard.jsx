@@ -1,32 +1,70 @@
 import { FaRegListAlt } from "react-icons/fa";
 import { MdLibraryMusic } from "react-icons/md";
 import { FaUsers } from "react-icons/fa6";
-
 import Table from "../../../Components/Table";
-import { Songs } from "../../../Data/SongData";
-import { AlbumsData } from "../../../Data/AlbumsData";
-import { UsersData } from "../../../Data/UsersData";
 import SideBar from "../SideBar";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAllUsersAction } from "../../../Redux/Actions/userActions";
+import toast from "react-hot-toast";
+import Loader from "../../../Components/Notifications/Loader";
+import { Empty } from "../../../Components/Notifications/Empty";
+import { deleteSongAction } from "../../../Redux/Actions/SongsActions";
 
 function Dashboard() {
+  const dispatch = useDispatch();
+
+  const { isLoading, isError, songs, totalSongs } = useSelector(
+    (state) => state.getAllSongs
+  );
+  const {
+    isLoading: albumLoading,
+    isError: albumError,
+    albums,
+  } = useSelector((state) => state.albumGetAll);
+  const {
+    isLoading: userLoading,
+    isError: userError,
+    users,
+  } = useSelector((state) => state.adminGetAllUsers);
+  const { isLoading: deleteLoading, isError: deleteError } = useSelector(
+    (state) => state.deleteSong
+  );
+
+  // delete song handler
+  const deleteSongHandler = (id) => {
+    window.confirm("Are you sure you want to delete this song?") &&
+      dispatch(deleteSongAction(id));
+  };
+
+  useEffect(() => {
+    // get all users
+    dispatch(getAllUsersAction());
+    // errors
+    if (isError || albumError || userError || deleteError) {
+      toast.error("Something went wrong");
+    }
+  }, [dispatch, isError, albumError, userError, deleteError]);
+
+  // dashboard data
   const DashboardData = [
     {
       bg: "bg-orange-600",
       icon: FaRegListAlt,
       title: "Total Songs",
-      total: Songs.length,
+      total: isLoading ? "Loading..." : totalSongs ?? 0,
     },
     {
       bg: "bg-blue-700",
       icon: MdLibraryMusic,
       title: "Total Albums",
-      total: AlbumsData.length,
+      total: albumLoading ? "Loading..." : albums?.length ?? 0,
     },
     {
       bg: "bg-green-600",
       icon: FaUsers,
       title: "Total Users",
-      total: UsersData.length,
+      total: userLoading ? "Loading..." : users?.length ?? 0,
     },
   ];
   return (
@@ -53,8 +91,17 @@ function Dashboard() {
       <h3 className="text-md font-medium italic my-6 text-border">
         Recent Songs
       </h3>
-
-      <Table data={Songs.slice(0, 5)} admin />
+      {isLoading || deleteLoading ? (
+        <Loader />
+      ) : songs?.length > 0 ? (
+        <Table
+          data={songs.slice(0, 5)}
+          admin
+          onDeleteHandler={deleteSongHandler}
+        />
+      ) : (
+        <Empty message="Empty" />
+      )}
     </SideBar>
   );
 }

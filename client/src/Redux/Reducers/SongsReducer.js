@@ -79,3 +79,31 @@ export const createReviewReducer = (state = {}, action) => {
       return state;
   }
 };
+
+// DELETE SONG
+export const deleteSongReducer = (state = {}, action) => {
+  switch (action.type) {
+    case SongsConstants.DELETE_SONG_REQUEST:
+      return { isLoading: true };
+    case SongsConstants.DELETE_SONG_SUCCESS:
+      return { isLoading: false, isSuccess: true };
+    case SongsConstants.DELETE_SONG_FAIL:
+      return { isLoading: false, isError: action.payload };
+    default:
+      return state;
+  }
+};
+
+// DELETE ALL SONGS
+export const deleteAllSongsReducer = (state = {}, action) => {
+  switch (action.type) {
+    case SongsConstants.DELETE_ALL_SONGS_REQUEST:
+      return { isLoading: true };
+    case SongsConstants.DELETE_ALL_SONGS_SUCCESS:
+      return { isLoading: false, isSuccess: true };
+    case SongsConstants.DELETE_ALL_SONGS_FAIL:
+      return { isLoading: false, isError: action.payload };
+    default:
+      return state;
+  }
+};

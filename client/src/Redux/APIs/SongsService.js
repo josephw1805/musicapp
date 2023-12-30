@@ -46,10 +46,32 @@ const reviewSongService = async (token, id, review) => {
   return data;
 };
 
+// delete song API
+const deleteSongService = async (token, id) => {
+  const { data } = await Axios.delete(`/songs/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return data;
+};
+
+// delete all songs API
+const deleteAllSongsService = async (token) => {
+  const { data } = await Axios.delete("/songs", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return data;
+};
+
 export {
   getAllSongsService,
   getRandomSongService,
   getSongByIdService,
   getTopRatedSongsService,
   reviewSongService,
+  deleteSongService,
+  deleteAllSongsService,
 };
