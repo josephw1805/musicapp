@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import Table from "../../Components/Table";
 import SideBar from "./SideBar";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import {
   deleteFavoriteSongsAction,
   getFavoriteSongsAction,

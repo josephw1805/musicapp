@@ -222,7 +222,7 @@ function AddSong() {
                   <img
                     src={user?.image ?? "/assets/user.png"}
                     alt={user.name}
-                    className="w-full h-32 object-cover rounded mb-4" // h-24
+                    className="w-full h-32 object-cover rounded mb-4"
                   />
                   <p>{user.name}</p>
                   <div className="flex-rows mt-2 w-full gap-2">

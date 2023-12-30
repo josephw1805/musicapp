@@ -1,4 +1,4 @@
-import { FaCloudDownloadAlt, FaEdit } from "react-icons/fa";
+import { FaEdit } from "react-icons/fa";
 import { GoEye } from "react-icons/go";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
@@ -51,7 +51,7 @@ const Rows = (song, i, onDeleteHandler, admin) => {
   );
 };
 
-function Table({ data, admin, onDeleteHandler, downloadVideo, progress }) {
+function Table({ data, admin, onDeleteHandler }) {
   return (
     <div className="overflow-x-scroll overflow-hidden relative w-full scrollbar-hide">
       <table className="w-full table-auto border border-border divide-y divide-border">

@@ -6,7 +6,7 @@ function Promos() {
       <div className="lg:grid lg:grid-cols-2 lg:gap-10 items-center">
         <div className="flex lg:gap-10 gap-6 flex-col">
           <h1 className="xl:text-3xl text-xl capitalize font-sans font-medium xl:leading-relaxed">
-            Download Songs Listen offline <br /> anytime, anywhere
+            Discography
           </h1>
           <div className="text-text text-xs xl:text-base leading-6 xl:leading-8 max-h-48 xl:max-h-96 overflow-y-scroll scrollbar-hide">
             <table
