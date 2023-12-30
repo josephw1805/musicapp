@@ -107,3 +107,41 @@ export const deleteAllSongsReducer = (state = {}, action) => {
       return state;
   }
 };
+
+// CREATE SONG
+export const createSongReducer = (state = {}, action) => {
+  switch (action.type) {
+    case SongsConstants.CREATE_SONG_REQUEST:
+      return { isLoading: true };
+    case SongsConstants.CREATE_SONG_SUCCESS:
+      return { isLoading: false, isSuccess: true };
+    case SongsConstants.CREATE_SONG_FAIL:
+      return { isLoading: false, isError: action.payload };
+    case SongsConstants.CREATE_SONG_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+// ARTISTS
+export const ArtistsReducer = (state = { artists: [] }, action) => {
+  switch (action.type) {
+    case SongsConstants.ADD_ARTIST:
+      return { artists: [...state.artists, action.payload] };
+    case SongsConstants.EDIT_ARTIST:
+      const updatedArtists = state.artists.map((artist) =>
+        artist.id === action.payload.id ? action.payload : artist
+      );
+      return { artists: updatedArtists };
+    case SongsConstants.DELETE_ARTIST:
+      return {
+        ...state,
+        artists: state.artists.filter((artist) => artist.id !== action.payload),
+      };
+    case SongsConstants.RESET_ARTIST:
+      return { artists: [] };
+    default:
+      return state;
+  }
+};

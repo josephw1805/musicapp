@@ -83,7 +83,7 @@ function WatchPage() {
                 </button>
               </div>
               <img
-                src={song?.image ?? "/assets/songbackground.png"}
+                src={song?.image}
                 alt={song?.name}
                 className="w-full h-full object-cover rounded-lg"
               />

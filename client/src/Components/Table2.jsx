@@ -14,7 +14,7 @@ const Rows = ({ data, users, OnEditFunction, onDeleteFunction }) => {
             <div className="w-12 p-1 bg-dry border border-border h-12 rounded overflow-hidden">
               <img
                 className="h-full w-full object-cover"
-                src={data?.image ?? "/assets/artist.png"}
+                src={data?.image ?? "/assets/user.png"}
                 alt={data?.fullName}
               />
             </div>

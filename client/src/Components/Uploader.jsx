@@ -14,7 +14,6 @@ function Uploader({ setImageUrl }) {
       file.append("file", acceptedFiles[0]);
       const data = await uploadImageService(file, setLoading);
       setImageUrl(data);
-      console.log(data);
     },
     [setImageUrl]
   );

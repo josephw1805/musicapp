@@ -66,6 +66,16 @@ const deleteAllSongsService = async (token) => {
   return data;
 };
 
+// create song API
+const createSongService = async (token, song) => {
+  const { data } = await Axios.post("/songs", song, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return data;
+};
+
 export {
   getAllSongsService,
   getRandomSongService,
@@ -74,4 +84,5 @@ export {
   reviewSongService,
   deleteSongService,
   deleteAllSongsService,
+  createSongService,
 };

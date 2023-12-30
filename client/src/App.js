@@ -79,7 +79,7 @@ function App() {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/albums" element={<Albums />} />
                 <Route path="/users" element={<Users />} />
-                {/* <Route path="/addsong" element={<AddSong />} /> */}
+                <Route path="/addsong" element={<AddSong />} />
               </Route>
             </Route>
           </Routes>

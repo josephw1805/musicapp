@@ -127,3 +127,57 @@ export const deleteAllSongsAction = () => async (dispatch, getState) => {
     ErrorsAction(error, dispatch, SongsConstants.DELETE_ALL_SONGS_FAIL);
   }
 };
+
+// create song action
+export const createSongAction = (song) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: SongsConstants.CREATE_SONG_REQUEST });
+    const response = await SongsAPIs.createSongService(
+      tokenProtection(getState),
+      song
+    );
+    dispatch({
+      type: SongsConstants.CREATE_SONG_SUCCESS,
+      payload: response,
+    });
+    toast.success("Song created successfully");
+    dispatch(deleteAllArtistAction());
+  } catch (error) {
+    ErrorsAction(error, dispatch, SongsConstants.CREATE_SONG_FAIL);
+  }
+};
+
+// ********ARTIST********
+
+// add artist
+export const addArtistAction = (artist) => async (dispatch, getState) => {
+  dispatch({
+    type: SongsConstants.ADD_ARTIST,
+    payload: artist,
+  });
+  localStorage.setItem("artists", JSON.stringify(getState().artists.artists));
+};
+
+// remove artist
+export const removeArtistAction = (id) => async (dispatch, getState) => {
+  dispatch({
+    type: SongsConstants.DELETE_ARTIST,
+    payload: id,
+  });
+  localStorage.setItem("artists", JSON.stringify(getState().artists.artists));
+};
+
+// update artist
+export const updateArtistAction = (artist) => async (dispatch, getState) => {
+  dispatch({
+    type: SongsConstants.EDIT_ARTIST,
+    payload: artist,
+  });
+  localStorage.setItem("artists", JSON.stringify(getState().artists.artists));
+};
+
+// delete artist
+export const deleteAllArtistAction = () => async (dispatch) => {
+  dispatch({ type: SongsConstants.RESET_ARTIST });
+  localStorage.removeItem("artists");
+};
