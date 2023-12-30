@@ -7,19 +7,22 @@ import { ImUpload } from "react-icons/im";
 import ArtistModal from "../../../Components/Modals/ArtistModal";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { songValidation } from "../../../Components/Validation/SongValidation";
 import { InlineError } from "../../../Components/Notifications/Error";
 import toast from "react-hot-toast";
 import {
-  createSongAction,
+  getSongByIdAction,
   removeArtistAction,
+  updateSongAction,
 } from "../../../Redux/Actions/SongsActions";
 import { Imagepreview } from "../../../Components/Imagepreview";
+import Loader from "../../../Components/Notifications/Loader";
+import NotFound from "../../NotFound";
 
-function AddSong() {
+function EditSong() {
   const [modalOpen, setModalOpen] = useState(false);
   const [artist, setArtist] = useState(null);
   const [imageWithoutTitle, setImageWithoutTitle] = useState();
@@ -27,18 +30,24 @@ function AddSong() {
   const [videoUrl, setVideoUrl] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const { albums } = useSelector((state) => state.albumGetAll);
-  const { isLoading, isError, isSuccess } = useSelector(
-    (state) => state.createSong
+  const { isLoading, isError, song } = useSelector(
+    (state) => state.getSongById
   );
+  const {
+    isLoading: editLoading,
+    isError: editError,
+    isSuccess,
+  } = useSelector((state) => state.updateSong);
   const { artists } = useSelector((state) => state.artists);
 
   // validate song
   const {
     register,
     handleSubmit,
-    reset,
+    setValue,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(songValidation),
@@ -47,12 +56,12 @@ function AddSong() {
   // on submit
   const onSubmit = (data) => {
     dispatch(
-      createSongAction({
+      updateSongAction(song?._id, {
         ...data,
         image: imageWithoutTitle,
         titleImage: imageTitle,
         video: videoUrl,
-        artists,
+        artists: artists.length > 0 ? artists : song?.artists,
       })
     );
   };
@@ -63,42 +72,49 @@ function AddSong() {
   };
 
   useEffect(() => {
+    if (song?._id !== id) {
+      dispatch(getSongByIdAction(id));
+    } else {
+      setValue("name", song?.name);
+      setValue("genre", song?.genre);
+      setValue("language", song?.language);
+      setValue("year", song?.year);
+      setValue("album", song?.album);
+      setValue("desc", song?.desc);
+      setImageWithoutTitle(song?.image);
+      setImageTitle(song?.titleImage);
+      setVideoUrl(song?.video);
+    }
     // if modal is closed, reset artist
     if (!modalOpen) {
       setArtist();
     }
     // if its success then reset form and navigate to addSong
     if (isSuccess) {
-      reset({
-        name: "",
-        genre: "",
-        language: "",
-        year: "",
-        album: "",
-        desc: "",
-      });
-      setImageTitle();
-      setImageWithoutTitle();
-      setVideoUrl("");
-      dispatch({ type: "CREATE_SONG_RESET" });
-      navigate("/addSong");
+      dispatch({ type: "UPDATE_SONG_RESET" });
+      navigate(`/edit/${id}`);
     }
     // if error then show error
-    if (isError) {
+    if (editError) {
       toast.error("Something went wrong");
-      dispatch({ type: "CREATE_SONG_RESET" });
+      dispatch({ type: "UPDATE_SONG_RESET" });
     }
-  }, [modalOpen, isSuccess, isError, dispatch, navigate, reset]);
+  }, [dispatch, id, song, modalOpen, setValue, isSuccess, editError, navigate]);
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : isError ? (
+    <NotFound />
+  ) : (
     <SideBar>
       <ArtistModal
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
         artist={artist}
       />
+
       <div className="flex flex-col gap-6">
-        <h2 className="text-xl font-bold">Create Song</h2>
+        <h2 className="text-xl font-bold">Edit "{song?.name}"</h2>
         <div className="w-full grid md:grid-cols-2 gap-6">
           <div className="w-full ">
             <Input
@@ -250,15 +266,15 @@ function AddSong() {
         {/* SUBMIT */}
 
         <button
-          disabled={isLoading || !imageWithoutTitle || !imageTitle || !videoUrl}
+          disabled={editLoading}
           onClick={handleSubmit(onSubmit)}
           className="bg-subMain w-full flex-rows gap-6 font-medium text-white py-4 rounded"
         >
-          {isLoading ? (
-            "Please wait..."
+          {editLoading ? (
+            "Updating..."
           ) : (
             <>
-              <ImUpload /> Publish Song
+              <ImUpload /> Update Song
             </>
           )}
         </button>
@@ -267,4 +283,4 @@ function AddSong() {
   );
 }
 
-export default AddSong;
+export default EditSong;

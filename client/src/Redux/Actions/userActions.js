@@ -1,4 +1,6 @@
 import * as userConstants from "../Constants/userConstants";
+import * as songConstants from "../Constants/SongConstants";
+import * as albumConstants from "../Constants/albumConstants";
 import * as userApi from "../APIs/userServices";
 import toast from "react-hot-toast";
 import { ErrorsAction, tokenProtection } from "../Protection";
@@ -32,6 +34,22 @@ const logoutAction = () => async (dispatch) => {
   dispatch({ type: userConstants.USER_LOGOUT });
   dispatch({ type: userConstants.USER_LOGIN_RESET });
   dispatch({ type: userConstants.USER_REGISTER_RESET });
+  dispatch({ type: userConstants.DELETE_FAVORITE_SONGS_RESET });
+  dispatch({ type: userConstants.USER_UPDATE_PROFILE_RESET });
+  dispatch({ type: userConstants.USER_DELETE_PROFILE_RESET });
+  dispatch({ type: userConstants.USER_CHANGE_PASSWORD_RESET });
+  dispatch({ type: userConstants.GET_FAVORITE_SONGS_RESET });
+  dispatch({ type: userConstants.GET_ALL_USERS_RESET });
+  dispatch({ type: userConstants.DELETE_USER_RESET });
+  dispatch({ type: userConstants.LIKE_SONG_RESET });
+  dispatch({ type: songConstants.SONGS_DETAILS_RESET });
+  dispatch({ type: songConstants.CREATE_REVIEW_RESET });
+  dispatch({ type: songConstants.CREATE_SONG_RESET });
+  dispatch({ type: songConstants.RESET_ARTIST });
+  dispatch({ type: songConstants.UPDATE_SONG_RESET });
+  dispatch({ type: albumConstants.CREATE_ALBUM_RESET });
+  dispatch({ type: albumConstants.UPDATE_ALBUM_RESET });
+  dispatch({ type: albumConstants.DELETE_ALBUM_RESET });
 };
 
 // update profile action

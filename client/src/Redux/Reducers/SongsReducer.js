@@ -145,3 +145,19 @@ export const ArtistsReducer = (state = { artists: [] }, action) => {
       return state;
   }
 };
+
+// UPDATE SONG
+export const updateSongReducer = (state = {}, action) => {
+  switch (action.type) {
+    case SongsConstants.UPDATE_SONG_REQUEST:
+      return { isLoading: true };
+    case SongsConstants.UPDATE_SONG_SUCCESS:
+      return { isLoading: false, isSuccess: true };
+    case SongsConstants.UPDATE_SONG_FAIL:
+      return { isLoading: false, isError: action.payload };
+    case SongsConstants.UPDATE_SONG_RESET:
+      return {};
+    default:
+      return state;
+  }
+};

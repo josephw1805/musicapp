@@ -147,6 +147,27 @@ export const createSongAction = (song) => async (dispatch, getState) => {
   }
 };
 
+// update song action
+export const updateSongAction = (id, song) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: SongsConstants.UPDATE_SONG_REQUEST });
+    const response = await SongsAPIs.updateSongService(
+      tokenProtection(getState),
+      id,
+      song
+    );
+    dispatch({
+      type: SongsConstants.UPDATE_SONG_SUCCESS,
+      payload: response,
+    });
+    toast.success("Song updated successfully");
+    dispatch(getSongByIdAction(id));
+    dispatch(deleteAllArtistAction());
+  } catch (error) {
+    ErrorsAction(error, dispatch, SongsConstants.UPDATE_SONG_FAIL);
+  }
+};
+
 // ********ARTIST********
 
 // add artist

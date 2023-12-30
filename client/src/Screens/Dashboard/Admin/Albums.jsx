@@ -6,7 +6,7 @@ import { HiPlusCircle } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../../Components/Notifications/Loader";
 import { Empty } from "../../../Components/Notifications/Empty";
-import { deleteAlbumAction, getAlbumsAction } from "../../../Redux/Actions/AlbumsActions";
+import { deleteAlbumAction } from "../../../Redux/Actions/AlbumsActions";
 import toast from "react-hot-toast";
 
 function Albums() {
@@ -30,7 +30,6 @@ function Albums() {
   };
 
   useEffect(() => {
-    dispatch(getAlbumsAction())
     if (isError) {
       toast.error(isError);
       dispatch({ type: "DELETE_ALBUM_RESET" });

@@ -28,6 +28,7 @@ import { getAlbumsAction } from "./Redux/Actions/AlbumsActions";
 import { getAllSongsAction } from "./Redux/Actions/SongsActions";
 import { getFavoriteSongsAction } from "./Redux/Actions/userActions";
 import toast from "react-hot-toast";
+import EditSong from "./Screens/Dashboard/Admin/EditSong";
 
 function App() {
   Aos.init();
@@ -80,6 +81,7 @@ function App() {
                 <Route path="/albums" element={<Albums />} />
                 <Route path="/users" element={<Users />} />
                 <Route path="/addsong" element={<AddSong />} />
+                <Route path="/edit/:id" element={<EditSong />} />
               </Route>
             </Route>
           </Routes>

@@ -55,7 +55,6 @@ const songsSchema = mongoose.Schema(
     },
     video: {
       type: String,
-      required: true,
     },
     rate: {
       type: Number,

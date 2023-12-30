@@ -5,8 +5,11 @@ import { CgMenuBoxed } from "react-icons/cg";
 import MenuDrawer from "../../Components/MenuDrawer";
 import { useContext } from "react";
 import { SidebarContext } from "../../Context/DrawerContext";
+import { useSelector } from "react-redux";
 
 function MobileFooter() {
+  const { likedSongs } = useSelector((state) => state.userGetFavoriteSongs);
+  const { userInfo } = useSelector((state) => state.userLogin);
   const active = "bg-white text-main";
   const inActive =
     "transitions text-2xl flex-colo hover:bg-white hover:text-main rounded-md px-4 py-3";
@@ -28,11 +31,20 @@ function MobileFooter() {
             <div className="relative">
               <FiHeart />
               <div className="w-5 h-5 flex-colo rounded-full text-xs bg-subMain text-white absolute -top-5 -right-1">
-                3
+                {likedSongs?.length ?? 0}
               </div>
             </div>
           </NavLink>
-          <NavLink to="/login" className={Hover}>
+          <NavLink
+            to={
+              userInfo
+                ? userInfo.isAdmin
+                  ? "/dashboard"
+                  : "/profile"
+                : "/login"
+            }
+            className={Hover}
+          >
             <FiUserCheck />
           </NavLink>
           {/* Mobile Menu */}

@@ -3,7 +3,7 @@ import Axios from "./Axios";
 // **** PUBLIC APIs ****
 
 // get all songs API
-const getAllSongsService = async ({
+export const getAllSongsService = async ({
   album,
   genre,
   language,
@@ -19,25 +19,25 @@ const getAllSongsService = async ({
 };
 
 // get random song API
-const getRandomSongService = async () => {
+export const getRandomSongService = async () => {
   const { data } = await Axios.get("/songs/random/all");
   return data;
 };
 
 // get song by id API
-const getSongByIdService = async (id) => {
+export const getSongByIdService = async (id) => {
   const { data } = await Axios.get(`/songs/${id}`);
   return data;
 };
 
 // get top rated songs API
-const getTopRatedSongsService = async () => {
+export const getTopRatedSongsService = async () => {
   const { data } = await Axios.get("/songs/rated/top");
   return data;
 };
 
 // review song API
-const reviewSongService = async (token, id, review) => {
+export const reviewSongService = async (token, id, review) => {
   const { data } = await Axios.post(`/songs/${id}/reviews`, review, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -47,7 +47,7 @@ const reviewSongService = async (token, id, review) => {
 };
 
 // delete song API
-const deleteSongService = async (token, id) => {
+export const deleteSongService = async (token, id) => {
   const { data } = await Axios.delete(`/songs/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -57,7 +57,7 @@ const deleteSongService = async (token, id) => {
 };
 
 // delete all songs API
-const deleteAllSongsService = async (token) => {
+export const deleteAllSongsService = async (token) => {
   const { data } = await Axios.delete("/songs", {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -67,7 +67,7 @@ const deleteAllSongsService = async (token) => {
 };
 
 // create song API
-const createSongService = async (token, song) => {
+export const createSongService = async (token, song) => {
   const { data } = await Axios.post("/songs", song, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -76,13 +76,12 @@ const createSongService = async (token, song) => {
   return data;
 };
 
-export {
-  getAllSongsService,
-  getRandomSongService,
-  getSongByIdService,
-  getTopRatedSongsService,
-  reviewSongService,
-  deleteSongService,
-  deleteAllSongsService,
-  createSongService,
+// update song API
+export const updateSongService = async (token, id, song) => {
+  const { data } = await Axios.put(`/songs/${id}`, song, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return data;
 };

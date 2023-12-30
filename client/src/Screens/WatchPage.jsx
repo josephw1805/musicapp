@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import Layout from "../Layout/Layout";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { BiArrowBack } from "react-icons/bi";
 import { FaCloudDownloadAlt, FaPlay } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa6";
@@ -8,12 +8,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSongByIdAction } from "../Redux/Actions/SongsActions";
 import NotFound from "./NotFound";
 import Loader from "../Components/Notifications/Loader";
-import { LikeSong, SongLiked } from "../Context/Functionalities";
+import { DownloadVideo, LikeSong, SongLiked } from "../Context/Functionalities";
+import { SidebarContext } from "../Context/DrawerContext";
+import FileSaver from "file-saver";
 
 function WatchPage() {
   let { id } = useParams();
   const dispatch = useDispatch();
   const [play, setPlay] = useState(false);
+  const { progress, setProgress } = useContext(SidebarContext);
   const { isLoading, isError, song } = useSelector(
     (state) => state.getSongById
   );
@@ -23,6 +26,14 @@ function WatchPage() {
 
   // check if song is added to favorites
   const isLiked = SongLiked(song);
+
+  // download song video
+  const DownloadSongVideo = async (videoUrl, name) => {
+    await DownloadVideo(videoUrl, setProgress).then((data) => {
+      setProgress(0);
+      FileSaver.saveAs(data, name);
+    });
+  };
 
   useEffect(() => {
     // song id
@@ -56,7 +67,11 @@ function WatchPage() {
               >
                 <FaHeart />
               </button>
-              <button className="bg-subMain flex-rows gap-2 hover:text-main transitions text-white rounded px-8 font-medium py-3 text-sm">
+              <button
+                onClick={() => DownloadSongVideo(song?.video, song?.name)}
+                disabled={progress}
+                className="bg-subMain flex-rows gap-2 hover:text-main transitions text-white rounded px-8 font-medium py-3 text-sm"
+              >
                 <FaCloudDownloadAlt /> Download
               </button>
             </div>

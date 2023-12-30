@@ -25,9 +25,12 @@ const Rows = (song, i, onDeleteHandler, admin) => {
       <td className={`${Text} float-right flex-rows gap-2`}>
         {admin ? (
           <>
-            <button className="border border-border bg-dry flex-rows gap-2 text-border rounded pl-1 px-2">
+            <Link
+              to={`/edit/${song?._id}`}
+              className="border border-border bg-dry flex-rows gap-2 text-border rounded pl-1 px-2"
+            >
               Edit <FaEdit className="text-green-500" />
-            </button>
+            </Link>
             <button
               onClick={() => onDeleteHandler(song._id)}
               className="bg-subMain text-white rounded flex-colo  w-6 h-6"
@@ -36,24 +39,19 @@ const Rows = (song, i, onDeleteHandler, admin) => {
             </button>
           </>
         ) : (
-          <>
-            <button className="border border-border bg-dry flex-rows gap-2 text-border rounded pl-1 px-2">
-              Download <FaCloudDownloadAlt className="text-green-500" />
-            </button>
-            <Link
-              to={`/song/${song._id}`}
-              className="bg-subMain text-white rounded flex-colo  w-6 h-6"
-            >
-              <GoEye />
-            </Link>
-          </>
+          <Link
+            to={`/song/${song._id}`}
+            className="bg-subMain text-white rounded flex-colo  w-6 h-6"
+          >
+            <GoEye />
+          </Link>
         )}
       </td>
     </tr>
   );
 };
 
-function Table({ data, admin, onDeleteHandler }) {
+function Table({ data, admin, onDeleteHandler, downloadVideo, progress }) {
   return (
     <div className="overflow-x-scroll overflow-hidden relative w-full scrollbar-hide">
       <table className="w-full table-auto border border-border divide-y divide-border">
