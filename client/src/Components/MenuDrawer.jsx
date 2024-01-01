@@ -1,4 +1,4 @@
-import { BiPhoneCall } from "react-icons/bi";
+import { BiPhoneCall, BiHomeAlt } from "react-icons/bi";
 import { BsCollection } from "react-icons/bs";
 import { HiOutlineUserGroup } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
@@ -6,6 +6,11 @@ import { Link, NavLink } from "react-router-dom";
 
 function MenuDrawer({ closeDrawer, mobileDrawer }) {
   const links = [
+    {
+      name: "Home",
+      link: "/",
+      icon: BiHomeAlt,
+    },
     {
       name: "Songs",
       link: "/songs",
