@@ -60,7 +60,7 @@ function AboutUs() {
               </div>
 
               <div className="grid md:grid-cols-2 gap-6 mt-8">
-                <button onCLick={() => window.open(artistURL, '_blank');} className="p-8 bg-subMain border border-subMain hover:bg-transparent rounded-lg">
+                <button onCLick={() => window.open(artistURL, '_blank')} className="p-8 bg-subMain border border-subMain hover:bg-transparent rounded-lg">
                   <span className="text-3xl block font-extrabold uppercase">
                     Artist
                   </span>
