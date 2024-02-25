@@ -2,6 +2,12 @@ import Layout from "../Layout/Layout";
 import Head from "../Components/Head";
 
 function AboutUs() {
+  const artistURL = "https://artist-app-amber.vercel.app/";
+
+  const goTo = (url) => {
+    window.open(url, '_blank');
+  }
+  
   return (
     <Layout>
       <div className="min-height-screen container mx-auto px-2 my-6">
@@ -56,9 +62,9 @@ function AboutUs() {
                   thirteenth album "BITE BACK".
                 </p>
               </div>
-              {/* TODO: Click to go to Artist App */}
+
               <div className="grid md:grid-cols-2 gap-6 mt-8">
-                <button className="p-8 bg-subMain border border-subMain hover:bg-transparent rounded-lg">
+                <button onCLick={() => goTo(artistURL)} className="p-8 bg-subMain border border-subMain hover:bg-transparent rounded-lg">
                   <span className="text-3xl block font-extrabold uppercase">
                     Artist
                   </span>
