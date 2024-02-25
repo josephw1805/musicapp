@@ -3,7 +3,7 @@ import Head from "../Components/Head";
 
 function AboutUs() {
   const artistURL = "https://artist-app-amber.vercel.app/";
-  
+
   return (
     <Layout>
       <div className="min-height-screen container mx-auto px-2 my-6">
@@ -60,7 +60,10 @@ function AboutUs() {
               </div>
 
               <div className="grid md:grid-cols-2 gap-6 mt-8">
-                <button onCLick={() => window.open(artistURL, '_blank')} className="p-8 bg-subMain border border-subMain hover:bg-transparent rounded-lg">
+                <button
+                  onClick={() => window.open(artistURL, "_blank")}
+                  className="p-8 bg-subMain border border-subMain hover:bg-transparent rounded-lg"
+                >
                   <span className="text-3xl block font-extrabold uppercase">
                     Artist
                   </span>
