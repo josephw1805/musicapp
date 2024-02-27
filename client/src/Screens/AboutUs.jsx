@@ -2,7 +2,7 @@ import Layout from "../Layout/Layout";
 import Head from "../Components/Head";
 
 function AboutUs() {
-  const artistURL = "https://artist-app-amber.vercel.app/";
+  const artistURL = "https://artist-app-omega.vercel.app/";
 
   return (
     <Layout>
