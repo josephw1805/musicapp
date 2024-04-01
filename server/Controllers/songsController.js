@@ -22,8 +22,8 @@ const getSongs = asyncHandler(async (req, res) => {
 
     // load more songs functionality
     const page = Number(req.query.pageNumber) || 1; // if pageNumber is not provided in query, set it to 1
-    const limit = 10; // 10 songs per page
-    const skip = (page - 1) * limit; // skip 10 songs per page
+    const limit = 8; // 8 songs per page
+    const skip = (page - 1) * limit; // skip 8 songs per page
 
     // find songs by query, skip and limit
     const songs = await Song.find(query)
