@@ -3,6 +3,7 @@ import Head from "../Components/Head";
 
 function AboutUs() {
   const artistURL = "https://artist-app-omega.vercel.app/";
+  const shopURL = "https://shoppy-wdia.azurewebsites.net/";
 
   return (
     <Layout>
@@ -71,8 +72,7 @@ function AboutUs() {
                     Click to see more about Cyndi Wang
                   </p>
                 </button>
-                {/* TODO: Click to go to Shop App */}
-                <button className="p-8 bg-subMain border border-subMain hover:bg-transparent rounded-lg">
+                <button onClick={() => window.open(shopURL, "_blank")} className="p-8 bg-subMain border border-subMain hover:bg-transparent rounded-lg">
                   <span className="text-3xl block font-extrabold uppercase">
                     Shop
                   </span>
