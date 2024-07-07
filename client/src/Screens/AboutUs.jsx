@@ -3,7 +3,7 @@ import Head from "../Components/Head";
 
 function AboutUs() {
   const artistURL = "https://artist-app-omega.vercel.app/";
-  const shopURL = "https://shoppy-wdia.azurewebsites.net/";
+  const videoURL = "https://video-app-nine-kappa.vercel.app/666f294b8e42d7e4942cabc3/ProfileVideos";
 
   return (
     <Layout>
@@ -72,12 +72,12 @@ function AboutUs() {
                     Click to see more about Cyndi Wang
                   </p>
                 </button>
-                <button onClick={() => window.open(shopURL, "_blank")} className="p-8 bg-subMain border border-subMain hover:bg-transparent rounded-lg">
+                <button onClick={() => window.open(videoURL, "_blank")} className="p-8 bg-subMain border border-subMain hover:bg-transparent rounded-lg">
                   <span className="text-3xl block font-extrabold uppercase">
-                    Shop
+                    Video
                   </span>
                   <p className="mb-0 text-text leading-7 my-2 text-sm">
-                    Click to purchase albums
+                    Click to watch Videos
                   </p>
                 </button>
               </div>
