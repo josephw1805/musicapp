@@ -27,20 +27,12 @@ function Footer() {
       title: "Top Releases",
       links: [
         {
-          name: "Begin...",
-          link: "#",
+          name: "BITE BICK",
+          link: "https://musicapp-ten-flame.vercel.app/song/65902f822dc0c9e463cd9ec7",
         },
         {
-          name: "Cyndi Loves You",
-          link: "#",
-        },
-        {
-          name: "Honey",
-          link: "#",
-        },
-        {
-          name: "Cyndi With U",
-          link: "#",
+          name: "Loves You",
+          link: "https://musicapp-ten-flame.vercel.app/song/659033732dc0c9e463cd9fa0",
         },
       ],
     },
