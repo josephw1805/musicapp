@@ -5,7 +5,7 @@ import MobileFooter from "./Footer/MobileFooter";
 function Layout({ children }) {
   return (
     <>
-      <main className="bg-main text-white select-none min-h-screen">
+      <main className="relative flex flex-col bg-main text-white select-none min-h-screen">
         <NavBar />
         <div className="flex-grow flex-1">{children}</div>
         <Footer />
