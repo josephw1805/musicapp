@@ -5,13 +5,13 @@ import MobileFooter from "./Footer/MobileFooter";
 function Layout({ children }) {
   return (
     <>
-      <div className="bg-main text-white select-none min-h-screen">
+      <main className="bg-main text-white select-none min-h-screen">
         <NavBar />
-        {children}
+        <div className="flex-grow flex-1">{children}</div>
         <Footer />
         {/* mobile footer */}
         <MobileFooter />
-      </div>
+      </main>
     </>
   );
 }
