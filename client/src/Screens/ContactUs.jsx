@@ -28,7 +28,7 @@ function ContactUs() {
 
   return (
     <Layout>
-      <div className="min-height-screen container mx-auto px-2 my-6">
+      <div className="container mx-auto px-2 my-6">
         <Head title="Contact Us" />
         <div className="grid md:grid-cols-2 gap-6 lg:my-20 my-10 lg:grid-cols-3 xl:gap-8">
           {ContactData.map((item) => (
