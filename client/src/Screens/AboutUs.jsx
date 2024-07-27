@@ -1,9 +1,9 @@
 import Layout from "../Layout/Layout";
 import Head from "../Components/Head";
+import { Link } from "react-router-dom";
 
 function AboutUs() {
   const artistURL = "https://artist-app-omega.vercel.app/";
-  const videoURL = "https://video-app-nine-kappa.vercel.app/666f294b8e42d7e4942cabc3/ProfileVideos";
 
   return (
     <Layout>
@@ -72,14 +72,17 @@ function AboutUs() {
                     Click to see more about Cyndi Wang
                   </p>
                 </button>
-                <button onClick={() => window.open(videoURL, "_blank")} className="p-8 bg-subMain border border-subMain hover:bg-transparent rounded-lg">
+                <Link
+                  to="/songs"
+                  className="p-8 bg-subMain border border-subMain hover:bg-transparent rounded-lg flex-colo"
+                >
                   <span className="text-3xl block font-extrabold uppercase">
                     Video
                   </span>
                   <p className="mb-0 text-text leading-7 my-2 text-sm">
                     Click to watch Videos
                   </p>
-                </button>
+                </Link>
               </div>
             </div>
             <div className="mt-10 lg:mt-0">
