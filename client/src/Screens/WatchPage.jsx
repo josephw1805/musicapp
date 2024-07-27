@@ -63,6 +63,7 @@ function WatchPage() {
           {play ? (
             <video
               controls
+              autoPlay={play}
               className="w-full h-header rounded"
             >
               <source src={song?.video} type="video/mp4" title={song?.name} />
